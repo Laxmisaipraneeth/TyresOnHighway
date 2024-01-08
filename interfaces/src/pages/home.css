@@ -1,0 +1,46 @@
+.background-image {
+  background-image: url('../tyres.jpeg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 93.12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  text-align: center;
+  color: rgb(237, 228, 228);
+}
+
+.content h1 {
+  font-size: 6rem;
+  margin-bottom: 10px;
+  color: rgb(237, 221, 221);
+  text-align: center;
+}
+
+.button {
+  /* Add the following lines to increase the button size */
+  padding: 20px 60px; /* Adjust padding values as needed */
+  font-size: 1.5rem; /* Adjust font size as needed */
+  background-color: #807a7a; /* Change the background color if desired */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Add border-radius for rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.25s ease;
+  &:hover{
+    background-color: #D7D7D7 ;
+    color:black;
+    /* transform: scale(1.0002);  */
+    box-sizing:border-box;
+    /* border: 1px solid black; */
+    /* border-radius: 10px; */
+  }
+}
+
+.content p {
+  font-size: 1.5rem;
+  font-style: italic;
+}

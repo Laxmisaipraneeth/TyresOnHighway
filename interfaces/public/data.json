@@ -1,0 +1,41 @@
+{
+    "registration_number": "ABC123",
+    "mobno": "123-456-7890",
+    "occurrences": [
+        {
+            "date": "2023-01-01T12:30:00",
+            "label": "normal",
+            "exit": "Front Door"
+        },
+        {
+            "date": "2023-01-02T14:45:00",
+            "label": "cracked",
+            "exit": "Backyard Gate"
+        },
+        {
+            "date": "2023-01-03T10:15:00",
+            "label": "normal",
+            "exit": "Garage"
+        },
+        {
+            "date": "2023-01-04T17:00:00",
+            "label": "cracked",
+            "exit": "Side Entrance"
+        },
+        {
+            "date": "2023-01-05T08:00:00",
+            "label": "normal",
+            "exit": "Main Entrance"
+        },
+        {
+            "date": "2023-01-06T16:30:00",
+            "label": "cracked",
+            "exit": "Basement Door"
+        },
+        {
+            "date": "2023-01-07T11:45:00",
+            "label": "normal",
+            "exit": "Living Room Window"
+        }
+    ]
+}
