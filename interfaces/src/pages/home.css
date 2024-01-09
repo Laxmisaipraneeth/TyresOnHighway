@@ -1,5 +1,5 @@
 .background-image {
-  background-image: url('../tyres.jpeg'); /* Replace with your image path */
+  background-image: url('tyres.jpeg'); /* Replace with your image path */
   background-size: cover;
   background-position: center;
   height: 93.12vh;
