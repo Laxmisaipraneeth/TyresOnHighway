@@ -37,17 +37,34 @@ const ReportsTableRow = styled.tr`
     background-color: #ababa0;
   }
 `;
+
+const convertToIST = (utcDateString) => {
+  const options = {
+    timeZone: 'Asia/Kolkata',
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+
+  return new Date(utcDateString).toLocaleString('en-IN', options);
+};
+
 const DetailedReports = () => {
     const {state} = useLocation();
-    const data = state.userData
-  
+    const {data,registrationNo} = state || {}
     return (
       <ReportsContainer>
+        <h2>Detailed Reports of vehicle with {registrationNo}:</h2>
         <ReportsTable>
           <thead>
             <ReportsTableRow>
               <ReportsTh>Date</ReportsTh>
               <ReportsTh>Label</ReportsTh>
+              <ReportsTh>Confidence</ReportsTh>
               <ReportsTh>Exit</ReportsTh>
             </ReportsTableRow>
           </thead>
@@ -55,9 +72,10 @@ const DetailedReports = () => {
             {data &&
               data.map((occurrence, index) => (
                 <ReportsTableRow key={index}>
-                  <ReportsTd>{occurrence.toc}</ReportsTd>
-                  <ReportsTd>{occurrence.confidence}</ReportsTd>
+                  <ReportsTd>{convertToIST(occurrence.toc)}</ReportsTd>
                   <ReportsTd>{occurrence.prediction}</ReportsTd>
+                  <ReportsTd>{occurrence.confidence}</ReportsTd>
+                  <ReportsTd>{occurrence.exit}</ReportsTd>
                 </ReportsTableRow>
               ))}
           </tbody>

@@ -10,17 +10,92 @@ const handleSubmit = async (e, regno, telno, image) => {
     formdata.append('regno', regno);
     formdata.append('telno', telno);
     formdata.append('image', image);
-
-    try {
-        const response = await axios.post("http://localhost:5000/toll/upload", formdata, {
-            headers: {
-                "Content-Type": 'multipart/form-data'
-            },
-            timeout: 3000,
-        });
-
-        if (response.status === 200) {
-            toast.success('Submission successful', {
+    const patternRegex = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
+    const pattern2Regex = /^\d{10}$/
+    if (patternRegex.test(regno)) {
+        if(pattern2Regex.test(telno)){
+            try {
+                const response = await axios.post("http://localhost:5000/toll/upload", formdata, {
+                    headers: {
+                        "Content-Type": 'multipart/form-data'
+                    },
+                    timeout: 3000,
+                });
+    
+                if (response.status === 200) {
+                    toast.success('Submission successful', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        newestOnTop: false,
+                        closeOnClick: true,
+                        rtl: false,
+                        pauseOnFocusLoss: true,
+                        draggable: true,
+                        pauseOnHover: true,
+                        theme: 'light',
+                    });
+                } else {
+                    console.error('Unexpected response status:', response.status);
+                    toast.warning('Unexpected response status. Please try again.', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        newestOnTop: false,
+                        closeOnClick: true,
+                        rtl: false,
+                        pauseOnFocusLoss: true,
+                        draggable: true,
+                        pauseOnHover: true,
+                        theme: 'light',
+                    });
+                }
+            } catch (error) {
+                if (axios.isCancel(error)) {
+                    toast.warning('Request timed out', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        newestOnTop: false,
+                        closeOnClick: true,
+                        rtl: false,
+                        pauseOnFocusLoss: true,
+                        draggable: true,
+                        pauseOnHover: true,
+                        theme: 'light',
+                    });
+                } else if (error.code === 'ECONNABORTED') {
+                    toast.warning('Request timed out. Please try again.', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        newestOnTop: false,
+                        closeOnClick: true,
+                        rtl: false,
+                        pauseOnFocusLoss: true,
+                        draggable: true,
+                        pauseOnHover: true,
+                        theme: 'light',
+                    });
+                } else {
+                    console.error('Your token has expired. Login again to continue', error); 
+                    toast.warning('Your token has expired. Login again to continue', {
+                        position: 'top-right',
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        newestOnTop: false,
+                        closeOnClick: true,
+                        rtl: false,
+                        pauseOnFocusLoss: true,
+                        draggable: true,
+                        pauseOnHover: true,
+                        theme: 'light',
+                    });
+                }
+            }
+        }
+        else{
+            toast.warning('Please enter a valid mobile number',{
                 position: 'top-right',
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -31,63 +106,24 @@ const handleSubmit = async (e, regno, telno, image) => {
                 draggable: true,
                 pauseOnHover: true,
                 theme: 'light',
-            });
-        } else {
-            console.error('Unexpected response status:', response.status);
-            toast.warning('Unexpected response status. Please try again.', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                newestOnTop: false,
-                closeOnClick: true,
-                rtl: false,
-                pauseOnFocusLoss: true,
-                draggable: true,
-                pauseOnHover: true,
-                theme: 'light',
-            });
+            })
         }
-    } catch (error) {
-        if (axios.isCancel(error)) {
-            toast.warning('Request timed out', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                newestOnTop: false,
-                closeOnClick: true,
-                rtl: false,
-                pauseOnFocusLoss: true,
-                draggable: true,
-                pauseOnHover: true,
-                theme: 'light',
-            });
-        } else if (error.code === 'ECONNABORTED') {
-            toast.warning('Request timed out. Please try again.', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                newestOnTop: false,
-                closeOnClick: true,
-                rtl: false,
-                pauseOnFocusLoss: true,
-                draggable: true,
-                pauseOnHover: true,
-                theme: 'light',
-            });
-        } else {
-            console.error('Your token has expired. Login again to continue', error);toast.warning('Your token has expired. Login again to continue', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                newestOnTop: false,
-                closeOnClick: true,
-                rtl: false,
-                pauseOnFocusLoss: true,
-                draggable: true,
-                pauseOnHover: true,
-                theme: 'light',
-            });
-        }
+
+       
+    }
+    else{
+        toast.warning('Please enter a valid registration number',{
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            newestOnTop: false,
+            closeOnClick: true,
+            rtl: false,
+            pauseOnFocusLoss: true,
+            draggable: true,
+            pauseOnHover: true,
+            theme: 'light',
+        })
     }
 };
 

@@ -22,6 +22,7 @@ function App() {
         <Route path = '/user' element={<User/>}/>
         <Route path = '/dealer' element={<DealerLogin/>}/>
         <Route path = '/dealerReports' element={<DealerReports/>}/>
+        <Route path = '/detailedReports' element={<DetailedReports/>}/>
       </Routes>
     </BrowserRouter>
   );

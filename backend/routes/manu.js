@@ -60,10 +60,13 @@ router.get('/detailed',authenticateToken, async (req,res)=>{
     const vehno = req.query.registrationNo;
     const user = await User.findOne({registrationNo:vehno});
     if(user!==null && user!=undefined){
-        res.send(user.occurances);
+        res.json({detailedReports:user.occurances});
+        return
     }
-    res.sendStatus(404);
-    
+    else{
+        res.json({'notfound':true})
+        return
+    }
 })
 
 // function authenticateToken(req,res,next){

@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 // import toast
 
 
@@ -56,9 +56,19 @@ const PaginationContainer = styled.div`
   `;
 const DealerReports = () => {
   const {state} = useLocation();
+  const navigate = useNavigate();
   const data = state.data
   console.log(data)
-
+  const handleRowClick = async (regno)=>{
+    const params = {registrationNo:regno}
+    const response = await axios.get('http://localhost:5000/manu/detailed',{params})
+    if(response.data.notfound){
+      toast.error('Cannot retrieve data currently. Try again later')
+    }
+    else{
+      navigate('/detailedReports',{replace:true,state:{data:response.data.detailedReports,registrationNo:regno}})
+    }
+  }
 
   return (
     <ReportsContainer>
@@ -72,7 +82,7 @@ const DealerReports = () => {
         </thead>
         <tbody>
           {data.map((occurrence) => (
-            <ReportsTableRow key={occurrence.id}>
+            <ReportsTableRow key={occurrence.id} onClick={()=>handleRowClick(occurrence.registrationNo)}>
               <ReportsTd>{occurrence.registrationNo}</ReportsTd>
               <ReportsTd>{occurrence.mobileNo}</ReportsTd>
               <ReportsTd>{occurrence.occurances}</ReportsTd>

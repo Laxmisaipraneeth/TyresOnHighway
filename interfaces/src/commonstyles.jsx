@@ -5,9 +5,11 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  z-index: -1;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0; /* Light grey background */
+  background-color: #f0f0f0; 
+  
 `;
 
 export const ContentWrapper = styled.div`
@@ -17,7 +19,7 @@ export const ContentWrapper = styled.div`
 
 export const Login = styled.div`
 border: 2px solid #bdc3c7;
-border-radius: 0 0 10px 10px; /* Adjust border-radius for fitting with the Navbar */
+border-radius: 0 0 10px 10px; 
 padding: 20px;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
@@ -25,7 +27,7 @@ overflow: hidden;
 `;
 export const Signup = styled.div`
   border: 2px solid #bdc3c7;
-  border-radius: 0 0 10px 10px; /* Adjust border-radius for fitting with the Navbar */
+  border-radius: 0 0 10px 10px; 
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
